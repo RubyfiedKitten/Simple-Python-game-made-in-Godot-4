@@ -1,0 +1,137 @@
+[gd_scene load_steps=6 format=3 uid="uid://btl3qrb80ckmh"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_2ncl7"]
+[ext_resource type="FontFile" uid="uid://yupis71vbjiq" path="res://starborn/Starborn.ttf" id="2_u4wtv"]
+[ext_resource type="AudioStream" uid="uid://brc27ekqxr3fp" path="res://guessSound.wav" id="3_p4a6v"]
+[ext_resource type="AudioStream" uid="uid://qfhd31nph0wm" path="res://Victory.wav" id="4_ypvff"]
+[ext_resource type="AudioStream" uid="uid://dsigv5r7xwvth" path="res://fail.wav" id="5_bxdyr"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_2ncl7")
+
+[node name="ui" type="Node" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="ui"]
+offset_right = 385.0
+offset_bottom = 570.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="ui"]
+offset_left = 21.0
+offset_top = 94.0
+offset_right = 368.0
+offset_bottom = 175.0
+color = Color(0, 1, 0, 1)
+
+[node name="ColorRect5" type="ColorRect" parent="ui"]
+offset_left = 27.0
+offset_top = 102.0
+offset_right = 356.0
+offset_bottom = 167.0
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="ui"]
+offset_left = 20.0
+offset_top = 184.0
+offset_right = 369.0
+offset_bottom = 464.0
+color = Color(0, 1, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="ui"]
+offset_left = 28.0
+offset_top = 190.0
+offset_right = 360.0
+offset_bottom = 458.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="ui"]
+offset_left = 77.0
+offset_top = 62.0
+offset_right = 308.0
+offset_bottom = 85.0
+text = "Take a guess at the number :)"
+
+[node name="guess_limit" type="Label" parent="ui"]
+offset_left = 35.0
+offset_top = 113.0
+offset_right = 351.0
+offset_bottom = 155.0
+theme_override_font_sizes/font_size = 30
+text = "Guesses left:"
+
+[node name="Title" type="Label" parent="ui"]
+offset_left = 39.0
+offset_top = 20.0
+offset_right = 334.0
+offset_bottom = 54.0
+theme_override_font_sizes/font_size = 24
+text = "Guess The Number Game"
+
+[node name="high_low" type="Label" parent="ui"]
+offset_left = 177.0
+offset_top = 413.0
+offset_right = 443.0
+offset_bottom = 455.0
+theme_override_font_sizes/font_size = 25
+text = "Too high/ low"
+horizontal_alignment = 1
+
+[node name="Player_input" type="LineEdit" parent="ui"]
+offset_left = 42.0
+offset_top = 196.0
+offset_right = 350.0
+offset_bottom = 401.0
+theme_override_fonts/font = ExtResource("2_u4wtv")
+theme_override_font_sizes/font_size = 70
+placeholder_text = "###"
+alignment = 1
+max_length = 5
+context_menu_enabled = false
+
+[node name="Button" type="Button" parent="ui"]
+offset_left = 50.0
+offset_top = 411.0
+offset_right = 171.0
+offset_bottom = 448.0
+text = "Guess!"
+
+[node name="lowest" type="Label" parent="ui"]
+offset_left = 14.0
+offset_top = 470.0
+offset_right = 193.0
+offset_bottom = 505.0
+theme_override_font_sizes/font_size = 25
+text = "Lowest: #####"
+
+[node name="highest" type="Label" parent="ui"]
+offset_left = 195.0
+offset_top = 470.0
+offset_right = 378.0
+offset_bottom = 505.0
+theme_override_font_sizes/font_size = 25
+text = "highest: #####"
+
+[node name="rannum" type="Label" parent="ui"]
+offset_left = 93.0
+offset_top = 516.0
+offset_right = 289.0
+offset_bottom = 551.0
+theme_override_font_sizes/font_size = 25
+text = "Hidden Number"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="button" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_p4a6v")
+
+[node name="correct" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ypvff")
+
+[node name="wrong" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_bxdyr")
+
+[connection signal="pressed" from="ui/Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
